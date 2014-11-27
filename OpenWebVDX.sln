@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWebVDX", "OpenWebVDX\OpenWebVDX.csproj", "{355F5152-D7C0-4C84-9895-E6CD271E840D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWebVDX.Tests", "OpenWebVDX.Tests\OpenWebVDX.Tests.csproj", "{2ED0EB7F-AFE6-44F4-91F0-41AA725CCB92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{355F5152-D7C0-4C84-9895-E6CD271E840D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{355F5152-D7C0-4C84-9895-E6CD271E840D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{355F5152-D7C0-4C84-9895-E6CD271E840D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{355F5152-D7C0-4C84-9895-E6CD271E840D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ED0EB7F-AFE6-44F4-91F0-41AA725CCB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED0EB7F-AFE6-44F4-91F0-41AA725CCB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED0EB7F-AFE6-44F4-91F0-41AA725CCB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED0EB7F-AFE6-44F4-91F0-41AA725CCB92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
