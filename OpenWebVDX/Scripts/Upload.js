@@ -63,16 +63,22 @@ function FileSelectHandler(e) {
     // process all File objects
     var formData = new FormData();
     for (var i = 0, f; f = files[i]; i++) {
-        ParseFile(f);
         formData.append(f.name, f);
     }
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'UploadRequest');
     xhr.send(formData);
+    $("#filedrag").hide();
+    $("#vid_select_btn").hide();
+    $("#loading").show();
+    ParseFile(files[0]);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            alert(xhr.responseText);
+            $("#loading").hide();
+            $("#filedrag").show();
+            $("#messages").text("Upload Complete.");
+            $("#vid_select_btn").show();
         }
     }
 
@@ -81,10 +87,8 @@ function FileSelectHandler(e) {
 function ParseFile(file) {
     
     Output(
-		"<p>File information: <strong>" + file.name +
-		"</strong> type: <strong>" + file.type +
-		"</strong> size: <strong>" + file.size +
-		"</strong> bytes</p>"
+		"<p>Selected Video: <strong>" + file.name +
+		"</strong></p>"
 	);
 }
 

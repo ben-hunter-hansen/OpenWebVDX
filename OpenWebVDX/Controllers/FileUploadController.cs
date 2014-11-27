@@ -23,12 +23,12 @@ namespace OpenWebVDX.Controllers
         [ActionName("UploadRequest")]
         public JsonResult UploadFile()
         {
-            for (int i = 0; i < Request.Files.Count; i++)
-            {
-                HttpPostedFileBase file = Request.Files[i]; //Uploaded file
-                VDXFile vdxFile = new VDXFile(file);
-                vdxFile.writeToAppData(this.HttpContext);
-            }
+            HttpPostedFileBase file = Request.Files[0]; //Uploaded file
+            System.Diagnostics.Debug.WriteLine(file.GetType());
+            System.Diagnostics.Debug.WriteLine(file.ContentLength);
+            System.Diagnostics.Debug.WriteLine(file.ContentType);
+            VDXFile vdxFile = new VDXFile(file);
+            vdxFile.writeToAppData(this.HttpContext);
             return Json("Uploaded " + Request.Files.Count + " files");
         }
     }
