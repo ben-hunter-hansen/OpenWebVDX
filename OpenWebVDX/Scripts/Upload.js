@@ -93,6 +93,7 @@ function ParseFile(file) {
 }
 
 $(document).ready(function () {
+    $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
     $("#vid_select_btn").click(function () {
         $("#fileselect").trigger("click");
     });

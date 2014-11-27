@@ -18,31 +18,75 @@
 </div>
 <div class="container-fluid appnav">
     <div class="row">
-        <div class="col-xs-12 col-sm-4 appnav-item">
+        <div class="col-xs-6 col-sm-2 appnav-item">
             <a class="unstyled-link" href="/FileUpload/Upload">
-                <span style="font-size:100px" class="glyphicon glyphicon-cloud-upload"></span>
+                <span style="font-size:30px" class="glyphicon glyphicon-cloud-upload"></span>
                 <br />
                 <br />
                 <span>Upload</span>
             </a>
         </div>
-        <div class="col-xs-12 col-sm-4 appnav-item">
+        <div class="col-xs-6 col-sm-2 appnav-item">
             <a class="unstyled-link" href="#">
-                <span style="font-size:100px" class="glyphicon glyphicon-search"></span>
+                <span style="font-size:30px" class="glyphicon glyphicon-search"></span>
                 <br />
                 <br />
                 <span>Search</span>
             </a>
         </div>
-        <div class="col-xs-12 col-sm-4 appnav-item">
+        <div class="col-xs-6 col-sm-2 appnav-item">
             <a class="unstyled-link" href="#">
-                <span style="font-size:100px" class="glyphicon glyphicon-globe"></span>
+                <span style="font-size:30px" class="glyphicon glyphicon-globe"></span>
                 <br />
                 <br />
                 <span>Browse</span>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="#">
+                <span style="font-size:30px" class="glyphicon glyphicon-envelope"></span>
+                <br />
+                <br />
+                <span>Messages</span>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="#">
+                <span style="font-size:30px" class="glyphicon glyphicon-user"></span>
+                <br />
+                <br />
+                <span>Connections</span>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="#">
+                <span style="font-size:30px" class="glyphicon glyphicon-random"></span>
+                <br />
+                <br />
+                <span>Exchange</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--Placeholder for home page content -->
+<div style="height:50px"></div>
+
+<!-- Return to top nav-->
+<div class="container-fluid appnav">
+    <div class="row">
+        <div class="col-xs-12 appnav-item">
+            <a class="unstyled-link" id="to_top" href="">
+                <span style="font-size:50px" class="glyphicon glyphicon-arrow-up"></span>
             </a>
         </div>
     </div>
 </div>
 
 @Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $("#to_top").click(function (e) {
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: 0}, 'slow');
+    });
+</script>
