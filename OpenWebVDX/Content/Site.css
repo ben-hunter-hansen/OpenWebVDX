@@ -29,6 +29,24 @@ header, footer, nav, section {
     text-align: center;
 }
 
+.appindexgrid {
+    text-align:center;
+}
+
+.appindexvidcol {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.appindexvidbtn {
+    background-color: inherit;
+    color: inherit;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    border: 2px solid;
+}
+
 .appnav > .row {
     padding:30px;
 }
@@ -50,6 +68,8 @@ header, footer, nav, section {
     font-weight:bold;
     margin-bottom:15px;
 }
+
+
 
 /*Horizontally & vertically centered div wrapper*/
 .hvcenter {

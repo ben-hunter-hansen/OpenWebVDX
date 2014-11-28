@@ -70,7 +70,19 @@
 </div>
 
 <!--Placeholder for home page content -->
-<div style="height:50px"></div>
+<div id="vid_grid" class="container appindexgrid">
+    <div id="dynamic_vids" class="row">
+
+        <!-- Generated Template Example
+        <div class="col-xs-12 col-sm-3 appindexvidcol">
+            <span class="pull-left"><small><span class="glyphicon glyphicon-cloud-upload"></span> 11/26/14</small></span>
+            <span class="pull-right"><small><span class="glyphicon glyphicon-user"></span> admin</small></span>
+            <button class="appindexvidbtn">Video Title</button>
+        </div>
+        -->
+
+    </div>
+</div>
 
 <!-- Return to top nav-->
 <div class="container-fluid appnav">
@@ -84,6 +96,7 @@
 </div>
 
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/Index.js")
 <script type="text/javascript">
     $("#to_top").click(function (e) {
         e.preventDefault();
