@@ -1,9 +1,11 @@
-﻿using OpenWebVDX.API.FileHandler;
+﻿using Newtonsoft.Json.Linq;
+using OpenWebVDX.API.FileHandler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Utils;
 
 namespace OpenWebVDX.Controllers
 {
@@ -23,13 +25,23 @@ namespace OpenWebVDX.Controllers
         [ActionName("UploadRequest")]
         public JsonResult UploadFile()
         {
-            HttpPostedFileBase file = Request.Files[0]; //Uploaded file
-            System.Diagnostics.Debug.WriteLine(file.GetType());
-            System.Diagnostics.Debug.WriteLine(file.ContentLength);
-            System.Diagnostics.Debug.WriteLine(file.ContentType);
-            VDXFile vdxFile = new VDXFile(file);
-            vdxFile.writeToAppData(this.HttpContext);
-            return Json("Uploaded " + Request.Files.Count + " files");
+            string titleJson = Request.Form.ToString();
+            string videoTitle = StringOps.ExtractJsonValue(titleJson);
+            
+            System.Diagnostics.Debug.WriteLine(videoTitle);
+
+            HttpPostedFileBase file = Request.Files[0];
+
+            VDXFile vdxFile = new VDXFile(file, videoTitle);
+            if(!VDXFileValidator.isVideoFormat(vdxFile))
+            {
+                return Json("Upload failed: That is not a video.");
+            }
+            else
+            {
+                vdxFile.writeUpload(this.HttpContext, "admin", DateTime.Now.ToString());
+                return Json(file.FileName + " has been uploaded successfully!");
+            }
         }
     }
 }

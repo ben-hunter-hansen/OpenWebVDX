@@ -69,6 +69,16 @@
 </div>
 <div class="container appupload">
     <div class="row">
+        <div class="col-xs-12">
+            <h3>OpenWebVDX Upload Service</h3>
+        </div>
+        <div class="col-xs-12" style="margin-bottom:30px">
+            <div id="messages">
+                Please select a video or place one in the box
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2">
             <div id="loading" style="display:none">
                 <img src="@Url.Content("~/Content/themes/base/images/vdx-uploader.gif")" />
@@ -79,10 +89,11 @@
                 <input type="file" id="fileselect" style="visibility:hidden;position:absolute;left:-50;top:-50;" />
                 <div id="filedrag"><div style="margin-top:65px;">or place one here</div></div>
             </div>
-            <div id="submitbutton">
-                <button type="submit">Upload Files</button>
+            <div id="name_container" style="display:none">
+                <input type="text" name="video_name" id="video_name" class="apptext" placeholder="Enter a video name to be displayed in app"/>
             </div>
-            <div id="messages">
+            <div id="submit_container">
+                <button id="upload_btn" style="display:none">Upload</button>
             </div>
         </div>
     </div>

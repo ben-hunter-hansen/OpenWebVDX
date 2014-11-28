@@ -43,6 +43,14 @@ header, footer, nav, section {
     text-align:center;
 }
 
+.apptext {
+    width:100%;
+    height:100%;
+    color: #68A1EC;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
 /*Horizontally & vertically centered div wrapper*/
 .hvcenter {
     margin: auto;
@@ -114,6 +122,20 @@ textarea {
     width:100%;
     background-color:inherit;
     color:inherit;
+    border:2px solid;
+}
+
+#loading {
+    margin-bottom: 30px;
+}
+
+
+
+#upload_btn {
+    height:50px;
+    width:100%;
+    background-color:inherit;
+    color:#fff;
     border:2px solid;
 }
 #filedrag
