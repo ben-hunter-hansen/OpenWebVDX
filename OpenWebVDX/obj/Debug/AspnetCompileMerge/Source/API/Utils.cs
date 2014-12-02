@@ -5,13 +5,6 @@ using System.Collections.Generic;
 using System.Configuration;
 namespace Utils
 {
-    public static class VDXApplicationSettings
-    {
-        public const string PRODUCTION = "production";
-        public const string LOCAL = "local";
-
-        public static string Enviornment { get { return ConfigurationManager.AppSettings["Enviornment"]; } }
-    }
     public static class RequestValidation
     {
         public static bool HasNullParams(string parameter)

@@ -9,6 +9,9 @@ using OpenWebVDX.API.FileHandler;
 using Utils;
 using Newtonsoft.Json.Linq;
 using OpenWebVDX.Models;
+using OpenWebVDX.API;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace OpenWebVDX.Controllers
 {
@@ -26,9 +29,8 @@ namespace OpenWebVDX.Controllers
         [ActionName("GetIndexVids")]
         public JsonResult getVids()
         {
-            VideoInfo vdi = DatabaseOps.AllVideoInfo();
+            VideoList vdi = DatabaseOps.AllVideoInfo();
             return Json(vdi, JsonRequestBehavior.AllowGet);
-            //This whole thing sucks and doesn't work.
         }
-    }
+    } 
 }
