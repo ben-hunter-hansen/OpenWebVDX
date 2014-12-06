@@ -2,10 +2,14 @@
 using OpenWebVDX.API.FileHandler;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.WebSockets;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebSockets;
 using Utils;
 
 namespace OpenWebVDX.Controllers
@@ -20,6 +24,49 @@ namespace OpenWebVDX.Controllers
         public ActionResult GetUploadView()
         {
             return View();
+        }
+
+        [HttpGet]
+        [ActionName("SocketUpload")]
+        public JsonResult SocketUpload()
+        {
+            System.Diagnostics.Debug.WriteLine("Web Socket Request Received");
+            if (ControllerContext.HttpContext.IsWebSocketRequest)
+            {
+                
+                HttpContext.AcceptWebSocketRequest(BeginUpload);   
+                return Json("Socket established.");
+            }
+            else
+            {
+                return Json("Unable to process socket handshake");
+            }
+        }
+
+        public async Task BeginUpload(AspNetWebSocketContext context)
+        {
+            WebSocket socket = context.WebSocket;
+            ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[8192]);
+
+            WebSocketReceiveResult result = null;
+
+            using (var ms = new MemoryStream())
+            {
+                do
+                {
+                    result = await socket.ReceiveAsync(buffer, CancellationToken.None);
+                    ms.Write(buffer.Array, buffer.Offset, result.Count);
+                }
+                while (!result.EndOfMessage);
+
+                HttpPostedFileBase file = new MemoryFile(ms, "video/mp4","socketFile");
+                VDXFile vdxFile = new VDXFile(file, "socket_file", "admin", DateTime.Now.ToString());
+                bool uploadStatus = vdxFile.writeUpload(this.HttpContext);
+                if (uploadStatus)
+                {
+                    VDXMediaConverterFactory.CreateInstance(vdxFile);
+                }
+            }
         }
 
         [HttpPost]
@@ -43,13 +90,10 @@ namespace OpenWebVDX.Controllers
                 bool uploadStatus = vdxFile.writeUpload(this.HttpContext);
                 if(uploadStatus)
                 {
-                    Task.Factory.StartNew(() =>
-                    {
-                        VDXFile toConvert = vdxFile;
-                        toConvert.executeConversion();
-
-                    }); 
-                    return Json(file.FileName + " has been uploaded successfully!");
+                    VDXMediaConverterFactory.CreateInstance(vdxFile);
+                    return Json(
+                        "Your video has been uploaded successfully "+
+                        "and will be available for streaming shortly.");
                 }
                 else
                 {

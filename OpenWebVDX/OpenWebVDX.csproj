@@ -183,9 +183,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\FileHandler.cs" />
-    <Compile Include="API\Utils.cs" />
-    <Compile Include="API\VideoHandler.cs" />
+    <Compile Include="VDXApp\Cloud.cs" />
+    <Compile Include="VDXApp\File.cs" />
+    <Compile Include="VDXApp\Utility.cs" />
+    <Compile Include="VDXApp\Stream.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

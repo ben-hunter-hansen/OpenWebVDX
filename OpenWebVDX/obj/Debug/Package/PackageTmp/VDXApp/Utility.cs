@@ -147,7 +147,7 @@ namespace Utils
             {
                 connection.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT id, title, date, user FROM videos WHERE id=@id", connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT id, title, date, user, path FROM videos WHERE id=@id", connection);
                 cmd.Parameters.AddWithValue("@id", id);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -157,6 +157,7 @@ namespace Utils
                 requestedVideo.Title = rdr.GetString(1);
                 requestedVideo.Date = rdr.GetString(2);
                 requestedVideo.User = rdr.GetString(3);
+                requestedVideo.Path = rdr.GetString(4);
 
 
                 return requestedVideo;

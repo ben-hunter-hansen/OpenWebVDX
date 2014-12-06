@@ -104,6 +104,20 @@ $("#video_name").focus(function () {
     $(this).find("input").css("color", "#68A1EC");
 });
 
+function SocketConnect(data) {
+    var videoSocket = new WebSocket("ws://" + window.location.hostname + ":8080/FileUpload/SocketUpload");
+    
+    videoSocket.onopen = function () {
+        videoSocket.send(data);
+    };
+    videoSocket.onclose = function (event) {
+        alert('Socket closed with message ' + event.reason);
+    }
+    videoSocket.onerror = function () {
+        alert('Socket error!');
+    }
+}
+
 $("#upload_btn").click(function () {
     var nameInput = $("#video_name");
     var validationResult = isNamed($(nameInput).val());
@@ -125,12 +139,16 @@ $("#upload_btn").click(function () {
             console.log(e);
         }
         
-        xhr.open('POST', 'UploadRequest');
-        xhr.send(FORM_DATA);
+        //xhr.open('POST', 'UploadRequest');
+        //xhr.send(FORM_DATA);
+
+        SocketConnect(FORM_DATA);
+
         $(this).hide();
         $(nameInput).val("");
         $("#name_container").hide();
         $("#loading").show();
+
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 $("#loading").hide();
