@@ -1,0 +1,181 @@
+﻿html {
+    background-color: #68A1EC;
+}
+
+body {
+    font-size: 1.5em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #fee;
+    background-color: #68A1EC;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+.unstyled-link,
+.unstyled-link:hover,
+.unstyled-link:active,
+.unstyled-link:visited {
+    color:#fff;
+    text-decoration:none;
+}
+
+.appheader {
+    text-align:center;
+}
+
+.appnav {
+    text-align: center;
+}
+
+.appindexgrid {
+    text-align:center;
+}
+
+.appindexvidcol {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.appindexvidbtn {
+    background-color: inherit;
+    color: inherit;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    border: 2px solid;
+}
+
+.appnav > .row {
+    padding:30px;
+}
+
+.appnav-item {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.appupload {
+    margin-top:30px;
+    text-align:center;
+}
+
+.apptext {
+    width:100%;
+    height:100%;
+    color: #68A1EC;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+
+
+/*Horizontally & vertically centered div wrapper*/
+.hvcenter {
+    margin: auto;
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    /*border: 1px solid;*/
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* Disgusting CSS for file uploads */
+
+#vid_select_btn {
+    height:50px;
+    width:100%;
+    background-color:inherit;
+    color:inherit;
+    border:2px solid;
+}
+
+#loading {
+    margin-bottom: 30px;
+}
+
+
+
+#upload_btn {
+    height:50px;
+    width:100%;
+    background-color:inherit;
+    color:#fff;
+    border:2px solid;
+}
+#filedrag
+{
+	display: none;
+	font-weight: bold;
+	text-align: center;
+	padding: 1em 0;
+	margin: 1em 0;
+	color: #fff;
+	border: 2px dashed #fff;
+	border-radius: 7px;
+	cursor: default;
+    height: 200px;
+}
+
+#filedrag.hover
+{
+	color: #555;
+	border-color: #555;
+	border-style: solid;
+	box-shadow: inset 0 3px 4px #888;
+}

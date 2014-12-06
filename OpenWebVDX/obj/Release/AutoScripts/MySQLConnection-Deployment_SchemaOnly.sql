@@ -1,0 +1,17 @@
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[videos](
+	[ID] [int] NOT NULL,
+	[title] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[date] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[user] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[path] [varchar](max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+ CONSTRAINT [PrimaryKey_b9389e36-6b94-4788-819d-1d23145d0997] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+
+GO

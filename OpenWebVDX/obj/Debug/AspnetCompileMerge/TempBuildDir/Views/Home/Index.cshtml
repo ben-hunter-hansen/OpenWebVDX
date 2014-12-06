@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "OpenWebVDX";
+}
+
+
+<div class="container-fluid appheader">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1><a class="unstyled-link" href="/Home">OpenWebVDX</a></h1>
+            <div class="col-xs-10 col-xs-offset-1">
+                <span>
+                    OpenWebVDX is a cloud based HTML5 video exchange app.  Enjoy lightning fast
+                    uploads and streaming from any device, anywhere.
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid appnav">
+    <div class="row">
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="/FileUpload/Upload">
+                <span style="font-size:30px" class="glyphicon glyphicon-cloud-upload"></span>
+                <br />
+                <br />
+                <span>Upload</span>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="#">
+                <span style="font-size:30px" class="glyphicon glyphicon-search"></span>
+                <br />
+                <br />
+                <span>Search</span>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="#">
+                <span style="font-size:30px" class="glyphicon glyphicon-globe"></span>
+                <br />
+                <br />
+                <span>Browse</span>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="#">
+                <span style="font-size:30px" class="glyphicon glyphicon-envelope"></span>
+                <br />
+                <br />
+                <span>Messages</span>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="#">
+                <span style="font-size:30px" class="glyphicon glyphicon-user"></span>
+                <br />
+                <br />
+                <span>Connections</span>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-2 appnav-item">
+            <a class="unstyled-link" href="#">
+                <span style="font-size:30px" class="glyphicon glyphicon-random"></span>
+                <br />
+                <br />
+                <span>Exchange</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--Placeholder for home page content -->
+<div id="vid_grid" class="container appindexgrid">
+    <div id="dynamic_vids" class="row">
+
+        <!-- Generated Template Example
+        <div class="col-xs-12 col-sm-3 appindexvidcol">
+            <span class="pull-left"><small><span class="glyphicon glyphicon-cloud-upload"></span> 11/26/14</small></span>
+            <span class="pull-right"><small><span class="glyphicon glyphicon-user"></span> admin</small></span>
+            <button class="appindexvidbtn">Video Title</button>
+        </div>
+        -->
+
+    </div>
+</div>
+
+<!-- Return to top nav-->
+<div class="container-fluid appnav">
+    <div class="row">
+        <div class="col-xs-12 appnav-item">
+            <a class="unstyled-link" id="to_top" href="">
+                <span style="font-size:50px" class="glyphicon glyphicon-arrow-up"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/Index.js")
+
+<script type="text/javascript">
+    $("#to_top").click(function (e) {
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: 0}, 'slow');
+    });
+</script>

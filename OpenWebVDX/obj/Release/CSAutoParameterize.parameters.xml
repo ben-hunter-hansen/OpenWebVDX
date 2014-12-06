@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="MySQLConnection-Web.config Connection String" description="MySQLConnection Connection String used in web.config by the application to access the database." defaultValue="Server=97.91.97.208;&#xD;&#xA;                      user id=WebVDXAdmin; &#xD;&#xA;                      password=password;&#xD;&#xA;                      persist security info=True;&#xD;&#xA;                      database=web_vdx" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Ben\\Source\\Repos\\OpenWebVDX\\OpenWebVDX\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MySQLConnection']/@connectionString" />
+  </parameter>
+</parameters>
