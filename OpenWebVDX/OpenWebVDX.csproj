@@ -43,6 +43,7 @@
     </PublishDatabaseSettings>
     <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
     <PublishDatabases>false</PublishDatabases>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -183,10 +184,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="VDXApp\Cloud.cs" />
-    <Compile Include="VDXApp\File.cs" />
-    <Compile Include="VDXApp\Utility.cs" />
-    <Compile Include="VDXApp\Stream.cs" />
+    <Compile Include="VDXApp\CloudService.cs" />
+    <Compile Include="VDXApp\FileService.cs" />
+    <Compile Include="VDXApp\Utils.cs" />
+    <Compile Include="VDXApp\StreamService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -205,6 +206,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="VDXApp\WebSocketService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\accordion.css" />
@@ -251,7 +253,8 @@
     <Content Include="Content\themes\base\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\themes\base\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\themes\base\bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="Properties\PublishProfiles\openwebvdx.pubxml" />
+    <None Include="Properties\PublishProfiles\openwebvdx - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\openwebvdx - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

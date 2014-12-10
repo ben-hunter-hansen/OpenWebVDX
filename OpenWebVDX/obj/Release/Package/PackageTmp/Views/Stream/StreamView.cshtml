@@ -17,6 +17,22 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <div id="video_container" class="col-xs-12" style="padding:20px;">
+            <div style="text-align:center">
+            <video id="video_player" width="600" height="400" controls="controls" autoplay>
+                <source src="/Stream/GetVideoStream?id=@Html.DisplayFor(model => model.Id)" type='video/mp4; codecs="a_ac3, avc"'>
+                <source src="/Stream/GetVideoStream?id=@Html.DisplayFor(model => model.Id)" type="video/ogg">
+                <source src="/Stream/GetVideoStream?id=@Html.DisplayFor(model => model.Id)" type="video/webm">
+                Browser does not support HTML5 video.
+            </video>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid appnav">
     <div class="row">
         <div class="col-xs-6 col-sm-2 appnav-item">
@@ -65,30 +81,6 @@
                 <br />
                 <br />
                 <span>Exchange</span>
-            </a>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div id="video_container" class="col-xs-12" style="padding:20px;">
-            <video id="video_player" width="400" height="300" controls="controls">
-                <source src="/Stream/GetVideoStream?id=@Html.DisplayFor(model => model.Id)" type='video/mp4; codecs="a_ac3, avc"'>
-                <source src="/Stream/GetVideoStream?id=@Html.DisplayFor(model => model.Id)" type="video/ogg">
-                <source src="/Stream/GetVideoStream?id=@Html.DisplayFor(model => model.Id)" type="video/webm">
-                Browser does not support HTML5 video.
-            </video>
-        </div>
-    </div>
-</div>
-
-<!-- Return to top nav-->
-<div class="container-fluid appnav">
-    <div class="row">
-        <div class="col-xs-12 appnav-item">
-            <a class="unstyled-link" id="to_top" href="">
-                <span style="font-size:50px" class="glyphicon glyphicon-arrow-up"></span>
             </a>
         </div>
     </div>

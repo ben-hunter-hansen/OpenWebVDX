@@ -4,14 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
-
-using OpenWebVDX.API.FileHandler;
-using Utils;
 using Newtonsoft.Json.Linq;
 using OpenWebVDX.Models;
-using OpenWebVDX.API;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using VDXApp.Utils;
 
 namespace OpenWebVDX.Controllers
 {

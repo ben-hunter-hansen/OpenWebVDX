@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="openwebvdx" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Ben\\Source\\Repos\\OpenWebVDX\\OpenWebVDX\\obj\\Release\\Package\\PackageTmp$" />
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Ben\\Source\\Repos\\OpenWebVDX\\OpenWebVDX\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\ben\\Source\\Repos\\OpenWebVDX\\OpenWebVDX\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\ben\\Source\\Repos\\OpenWebVDX\\OpenWebVDX\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
   <parameter name="MySQLConnection-Web.config Connection String" description="" value="Data Source=97.91.97.208;Initial Catalog=web_vdx;Persist Security Info=True;User ID=WebVDXAdmin;Password=password" tags="">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\Ben\\Source\\Repos\\OpenWebVDX\\OpenWebVDX\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MySQLConnection']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ben\\Source\\Repos\\OpenWebVDX\\OpenWebVDX\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MySQLConnection']/@connectionString" />
+  </parameter>
+  <parameter name="StorageConnectionString-Web.config Connection String" description="" value="DefaultEndpointsProtocol=https;AccountName=openwebvdx;AccountKey=a5nYtYtIPNkIaDnCY44yPRtviR3TDaxxmy+dZ6pRR721DK/S4Szx9M8x7oClqUc+gS++hhBMG8QDviJTlPztNg==" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ben\\Source\\Repos\\OpenWebVDX\\OpenWebVDX\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='StorageConnectionString']/@connectionString" />
   </parameter>
 </parameters>

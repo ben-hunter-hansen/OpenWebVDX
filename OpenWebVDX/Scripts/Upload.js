@@ -1,5 +1,10 @@
 ﻿
 var FORM_DATA = undefined;
+
+//--Test variables for web socket
+var upload_file = undefined;
+var upload_filename = "";
+
 // getElementById
 function $id(id) {
     return document.getElementById(id);
@@ -61,6 +66,7 @@ function FileSelectHandler(e) {
     var formData = new FormData();
     for (var i = 0, f; f = files[i]; i++) {
         formData.append(f.name, f);
+        upload_file = f;
     }
 
     FORM_DATA = formData;
@@ -104,17 +110,36 @@ $("#video_name").focus(function () {
     $(this).find("input").css("color", "#68A1EC");
 });
 
-function SocketConnect(data) {
-    var videoSocket = new WebSocket("ws://" + window.location.hostname + ":8080/FileUpload/SocketUpload");
+function SocketConnect(data, name, title, type) {
+    var videoSocket = new WebSocket("wss://" + window.location.hostname + "/FileUpload/SocketUpload?name="+name+"&title="+title+"&type="+type);
     
+    var bytes = data.size;
+    var kb = bytes / 1024;
+    var mb = Math.floor(kb / 1024);
+
     videoSocket.onopen = function () {
+        $("#upload_btn").hide();
+        $("#video_name").val("");
+        $("#name_container").hide();
+        $("#loading").show();
         videoSocket.send(data);
     };
+
+    videoSocket.onmessage = function (event) {
+        var cur_bytes = event.data;
+        var perc_compl = Math.floor(cur_bytes / mb * 100);
+
+        $("#messages").text(cur_bytes + " of " + mb + " MB uploaded. ( " + perc_compl + "% )");
+    };
+
     videoSocket.onclose = function (event) {
-        alert('Socket closed with message ' + event.reason);
+        $("#messages").text(event.reason);
+        $("#loading").hide();
+        $("#filedrag").show();
+        $("#vid_select_btn").show();
     }
     videoSocket.onerror = function () {
-        alert('Socket error!');
+        $("#messages").text("Upload Failed: Web Socket Error.");
     }
 }
 
@@ -138,25 +163,8 @@ $("#upload_btn").click(function () {
         } catch (e) {
             console.log(e);
         }
-        
-        //xhr.open('POST', 'UploadRequest');
-        //xhr.send(FORM_DATA);
 
-        SocketConnect(FORM_DATA);
-
-        $(this).hide();
-        $(nameInput).val("");
-        $("#name_container").hide();
-        $("#loading").show();
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                $("#loading").hide();
-                $("#filedrag").show();
-                $("#messages").text(xhr.responseText);
-                $("#vid_select_btn").show();
-            }
-        } 
+        SocketConnect(upload_file, upload_file.name, vid_name.value, upload_file.type);
     } 
 });
 

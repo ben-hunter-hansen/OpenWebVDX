@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
-using OpenWebVDX.API.FileHandler;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.WebSockets;
@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebSockets;
-using Utils;
+using VDXApp.FileService;
+using VDXApp.Utils;
+using VDXApp.WebSocketService;
+
 
 namespace OpenWebVDX.Controllers
 {
@@ -18,6 +21,9 @@ namespace OpenWebVDX.Controllers
     {
         //
         // GET: /FileUpload/
+        string NAME = "";
+        string TITLE = "";
+        string TYPE = "";
 
         [HttpGet]
         [ActionName("Upload")]
@@ -28,77 +34,84 @@ namespace OpenWebVDX.Controllers
 
         [HttpGet]
         [ActionName("SocketUpload")]
-        public JsonResult SocketUpload()
+        public void SocketUpload(string name,string title, string type)
         {
-            System.Diagnostics.Debug.WriteLine("Web Socket Request Received");
-            if (ControllerContext.HttpContext.IsWebSocketRequest)
+            System.Diagnostics.Debug.WriteLine("Web Socket Request Received with param "+name);
+            try
             {
-                
-                HttpContext.AcceptWebSocketRequest(BeginUpload);   
-                return Json("Socket established.");
+                if (ControllerContext.HttpContext.IsWebSocketRequest)
+                {
+                    NAME = name;
+                    TITLE = title;
+                    TYPE = type;
+                    HttpContext.AcceptWebSocketRequest(BeginUpload);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return Json("Unable to process socket handshake");
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
 
         public async Task BeginUpload(AspNetWebSocketContext context)
         {
-            WebSocket socket = context.WebSocket;
-            ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[8192]);
+            const int msg_size = 8192;
+            bool success = false;
 
+            WebSocket socket = context.WebSocket;
+            ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[msg_size]);
             WebSocketReceiveResult result = null;
 
-            using (var ms = new MemoryStream())
+            try
             {
-                do
-                {
-                    result = await socket.ReceiveAsync(buffer, CancellationToken.None);
-                    ms.Write(buffer.Array, buffer.Offset, result.Count);
-                }
-                while (!result.EndOfMessage);
 
-                HttpPostedFileBase file = new MemoryFile(ms, "video/mp4","socketFile");
-                VDXFile vdxFile = new VDXFile(file, "socket_file", "admin", DateTime.Now.ToString());
-                bool uploadStatus = vdxFile.writeUpload(this.HttpContext);
-                if (uploadStatus)
+                string f_path = context.Server.MapPath("~/App_Data/uploads/");
+                using (var fs = new System.IO.FileStream(f_path + NAME, System.IO.FileMode.Create,
+                             System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite))
                 {
+                    int bytes_up = 0;
+                    do
+                    {
+                        result = await socket.ReceiveAsync(buffer, CancellationToken.None);
+                        fs.Write(buffer.Array, buffer.Offset, result.Count);
+                        bytes_up += result.Count;
+
+                        //A KB of data has uploaded, notify client
+                        if (bytes_up % 1024 == 0)
+                        {
+                            int kb = bytes_up / 1024;
+                            int mb = kb / 1024;
+                            string bytesReadStr = mb.ToString();
+
+                            Byte[] sendBytes = System.Text.Encoding.UTF8.GetBytes(bytesReadStr);
+
+                            await socket.SendAsync(new ArraySegment<byte>(sendBytes),
+                                WebSocketMessageType.Text, true, CancellationToken.None);
+                        }
+                    }
+                    while (!result.EndOfMessage);
+
+                    await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Video successfully uploaded.", CancellationToken.None);
+                    success = true;
+
+                    HttpPostedFileBase file = new MemoryFile(fs, TYPE, NAME);
+                    VDXSocketFile vdxFile = new VDXSocketFile(file, TITLE, "admin", DateTime.Now.ToString());
+                    vdxFile.PrepareForConversion(f_path, "mp4");
                     VDXMediaConverterFactory.CreateInstance(vdxFile);
                 }
             }
-        }
-
-        [HttpPost]
-        [ActionName("UploadRequest")]
-        public JsonResult UploadFile()
-        {
-            string titleJson = Request.Form.ToString();
-            string videoTitle = StringOps.ExtractJsonValue(titleJson);
-            
-
-            HttpPostedFileBase file = Request.Files[0];
-
-            VDXFile vdxFile = new VDXFile(file, videoTitle, "admin", DateTime.Now.ToString());
-
-            if(!VDXFileValidator.isVideoFormat(vdxFile))
+            catch(Exception e)
             {
-                return Json("Upload failed: That is not a video.");
+                success = false;
+            }
+
+            if (success)
+            {
+                await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Upload Complete!.", CancellationToken.None);
             }
             else
             {
-                bool uploadStatus = vdxFile.writeUpload(this.HttpContext);
-                if(uploadStatus)
-                {
-                    VDXMediaConverterFactory.CreateInstance(vdxFile);
-                    return Json(
-                        "Your video has been uploaded successfully "+
-                        "and will be available for streaming shortly.");
-                }
-                else
-                {
-                    return Json("Upload failed: The server was unable to process the request.");
-                }
+                await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Upload Failed.", CancellationToken.None);
             }
         }
     }
